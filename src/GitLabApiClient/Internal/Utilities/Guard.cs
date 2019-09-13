@@ -24,6 +24,17 @@ namespace GitLabApiClient.Internal.Utilities
             throw new ArgumentException($"{message}");
         }
 
+        public static void OneIsNotEmpty(IEnumerable<Tuple<string,string>> argsAndArgNames, string message = null)
+        {
+            if(argsAndArgNames.Any((i) => !string.IsNullOrEmpty(i.Item1)))
+                return;
+
+            if (string.IsNullOrEmpty(message))
+                throw new ArgumentException($"ArgumentException: {string.Join(",",argsAndArgNames.Select(i => i.Item2))} strings not valid.");
+
+            throw new ArgumentException($"{message}");
+        }
+
 		public static void NotNullOrDefault<T>(T arg, string argName)
 		{
             if(Equals(arg, default(T)))

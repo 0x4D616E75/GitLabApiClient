@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GitLabApiClient.Models.Releases.Responses
 {
-    public sealed class Link
+    public class Link
     {
         [JsonProperty("id")]
         public int Id { get; set; }
-        
+
         [JsonProperty("name")]
         public string Name { get; set; }
 
