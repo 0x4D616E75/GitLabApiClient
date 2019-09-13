@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using GitLabApiClient.Internal.Http;
 using GitLabApiClient.Internal.Queries;
@@ -13,13 +12,16 @@ namespace GitLabApiClient
     {
         private readonly GitLabHttpFacade _httpFacade;
         private readonly ReleaseQueryBuilder _releaseQueryBuilder;
+        private readonly LinkQueryBuilder _linkQueryBuilder;
 
         internal ReleaseClient(
             GitLabHttpFacade httpFacade,
-            ReleaseQueryBuilder releaseQueryBuilder)
+            ReleaseQueryBuilder releaseQueryBuilder,
+            LinkQueryBuilder linkQueryBuilder)
         {
             _httpFacade = httpFacade;
             _releaseQueryBuilder = releaseQueryBuilder;
+            _linkQueryBuilder = linkQueryBuilder;
         }
 
         public async Task<Release> GetAsync(string projectId, string tagName) =>

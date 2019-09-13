@@ -44,6 +44,7 @@ namespace GitLabApiClient
             var projectsGroupsQueryBuilder = new ProjectsGroupQueryBuilder();
             var branchQueryBuilder = new BranchQueryBuilder();
             var releaseQueryBuilder = new ReleaseQueryBuilder();
+            var linkQueryBuilder = new LinkQueryBuilder();
             var tagQueryBuilder = new TagQueryBuilder();
 
             Issues = new IssuesClient(_httpFacade, issuesQueryBuilder, projectIssuesQueryBuilder, projectIssueNotesQueryBuilder);
@@ -53,7 +54,7 @@ namespace GitLabApiClient
             Users = new UsersClient(_httpFacade);
             Groups = new GroupsClient(_httpFacade, groupsQueryBuilder, projectsGroupsQueryBuilder, projectMilestonesQueryBuilder);
             Branches = new BranchClient(_httpFacade, branchQueryBuilder);
-            Releases = new ReleaseClient(_httpFacade, releaseQueryBuilder);
+            Releases = new ReleaseClient(_httpFacade, releaseQueryBuilder, linkQueryBuilder);
             Tags = new TagClient(_httpFacade, tagQueryBuilder);
             Markdown = new MarkdownClient(_httpFacade);
     }
