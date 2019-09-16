@@ -12,16 +12,13 @@ namespace GitLabApiClient
     {
         private readonly GitLabHttpFacade _httpFacade;
         private readonly ReleaseQueryBuilder _releaseQueryBuilder;
-        private readonly LinkQueryBuilder _linkQueryBuilder;
 
         internal ReleaseClient(
             GitLabHttpFacade httpFacade,
-            ReleaseQueryBuilder releaseQueryBuilder,
-            LinkQueryBuilder linkQueryBuilder)
+            ReleaseQueryBuilder releaseQueryBuilder)
         {
             _httpFacade = httpFacade;
             _releaseQueryBuilder = releaseQueryBuilder;
-            _linkQueryBuilder = linkQueryBuilder;
         }
 
         public async Task<Release> GetAsync(string projectId, string tagName) =>
