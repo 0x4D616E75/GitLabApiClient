@@ -1,4 +1,5 @@
-﻿using GitLabApiClient.Internal.Utilities;
+﻿using System.Collections.Generic;
+using GitLabApiClient.Internal.Utilities;
 using GitLabApiClient.Models.Releases.Responses;
 
 namespace GitLabApiClient.Models.Releases.Requests
@@ -11,6 +12,9 @@ namespace GitLabApiClient.Models.Releases.Requests
         public string ProjectId { get; }
 
         public string TagName { get; }
+
+        public IEnumerable<KeyValuePair<string,string>> GetContent() =>
+            new [] { new KeyValuePair<string,string>("name", Name), new KeyValuePair<string,string>("url", Url)};
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateLinkRequest"/> class.

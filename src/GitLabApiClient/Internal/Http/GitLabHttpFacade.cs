@@ -4,6 +4,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GitLabApiClient.Internal.Http.Serialization;
+using GitLabApiClient.Models.Releases.Requests;
+using GitLabApiClient.Models.Releases.Responses;
 using GitLabApiClient.Models.Uploads.Requests;
 using GitLabApiClient.Models.Uploads.Responses;
 using GitLabApiClient.Models.Users.Responses;
@@ -48,11 +50,17 @@ namespace GitLabApiClient.Internal.Http
         public Task<Upload> PostFile(string uri, CreateUploadRequest uploadRequest) =>
             _requestor.PostFile(uri, uploadRequest);
 
+        public Task<Link> PostLink(string uri, CreateLinkRequest linkRequest) =>
+            _requestor.PostLink(uri, linkRequest);
+
         public Task<T> Put<T>(string uri, object data) =>
             _requestor.Put<T>(uri, data);
 
 		public Task Put(string uri, object data) =>
 			_requestor.Put(uri, data);
+
+        public Task<Link> PutLink(string uri, UpdateLinkRequest linkRequest) =>
+            _requestor.PutLink(uri, linkRequest);
 
 		public Task Delete(string uri) =>
             _requestor.Delete(uri);

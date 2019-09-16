@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GitLabApiClient.Internal.Utilities;
 
 namespace GitLabApiClient.Models.Releases.Requests
@@ -15,6 +16,15 @@ namespace GitLabApiClient.Models.Releases.Requests
         public string Name { get; set; }
         public string Url { get; set; }
 
+        public IEnumerable<KeyValuePair<string,string>> GetContent()
+        {
+            var content = new List<KeyValuePair<string,string>>();
+            if(!string.IsNullOrEmpty(Name))
+                content.Add(new KeyValuePair<string,string>("name", Name));
+            if(!string.IsNullOrEmpty(Name))
+                content.Add(new KeyValuePair<string,string>("url", Url));
+            return content;
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateLinkRequest"/> class.
         /// </summary>

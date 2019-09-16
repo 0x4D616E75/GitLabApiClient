@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GitLabApiClient.Internal.Http.Serialization;
+using GitLabApiClient.Models.Releases.Requests;
+using GitLabApiClient.Models.Releases.Responses;
 using GitLabApiClient.Models.Uploads.Requests;
 using GitLabApiClient.Models.Uploads.Responses;
 
@@ -57,6 +59,17 @@ namespace GitLabApiClient.Internal.Http
             }
         }
 
+        public async Task<Link> PostLink(string url, CreateLinkRequest linkRequest)
+        {
+            using(var content = new FormUrlEncodedContent(linkRequest.GetContent()))
+            {
+                var responseMessage = await _client.PostAsync(url, content);
+                await EnsureSuccessStatusCode(responseMessage);
+
+                return await ReadResponse<Link>(responseMessage);
+            }
+        }
+
         public async Task<T> Put<T>(string url, object data)
         {
             StringContent content = SerializeToString(data);
@@ -71,6 +84,17 @@ namespace GitLabApiClient.Internal.Http
 			var responseMessage = await _client.PutAsync(url, content);
 			await EnsureSuccessStatusCode(responseMessage);
 		}
+
+        public async Task<Link> PutLink(string url, UpdateLinkRequest linkRequest)
+        {
+            using(var content = new FormUrlEncodedContent(linkRequest.GetContent()))
+            {
+                var responseMessage = await _client.PostAsync(url, content);
+                await EnsureSuccessStatusCode(responseMessage);
+
+                return await ReadResponse<Link>(responseMessage);
+            }
+        }
 
         public async Task Delete(string url)
         {

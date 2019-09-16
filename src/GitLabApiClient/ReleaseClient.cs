@@ -42,5 +42,23 @@ namespace GitLabApiClient
         public async Task DeleteAsync(DeleteReleaseRequest request) =>
             await _httpFacade.Delete($"projects/{request.ProjectId}/releases/{request.TagName}");
 
+
+
+
+
+        public async Task<Link> GetLinkAsync(string projectId, string tagName, string linkId) =>
+            await _httpFacade.Get<Link>($"projects/{projectId}/releases/{tagName}/assets/links/{linkId}");
+
+        public async Task<IList<Link>> GetLinksAsync(string projectId, string tagName) =>
+            await _httpFacade.GetPagedList<Link>($"projects/{projectId}/releases/{tagName}/assets/links");
+
+        public async Task<Link> CreateLinkAsync(CreateLinkRequest request) =>
+            await _httpFacade.PostLink($"projects/{request.ProjectId}/releases/{request.TagName}/assets/links/", request);
+
+        public async Task<Link> UpdateLinkAsync(UpdateLinkRequest request) =>
+            await _httpFacade.PutLink($"projects/{request.ProjectId}/releases/{request.TagName}/assets/links/", request);
+
+        public async Task DeleteAsync(DeleteLinkRequest request) =>
+            await _httpFacade.Delete($"projects/{request.ProjectId}/releases/{request.TagName}/assets/links/{request.LinkId}");
     }
 }
