@@ -57,7 +57,7 @@ namespace GitLabApiClient.Test
             var createdRelease = await _sut.CreateAsync(new CreateReleaseRequest(TestProjectTextId, TestRelease, TestTagName, TestDescription, DateTime.MinValue));
 
             //act
-            var releaseList = await _sut.GetAsync(TestProjectTextId, o => o.TagName = TestTagName);
+            var releaseList = await _sut.GetAsync(TestProjectTextId);
 
             //assert
             releaseList[0].Should().Match<Release>(i =>
