@@ -81,5 +81,28 @@ namespace GitLabApiClient.Test
             fetcheRelease.Should().BeNull();
         }
 
+        [Fact]
+        public async Task LinkCanBeAddedToRelease()
+        {
+            //arrange
+            var createdRelease = await _sut.CreateAsync(new CreateReleaseRequest(TestProjectTextId, TestRelease, TestTagName, TestDescription, DateTime.MinValue));
+
+            //act
+            var createdLink = await _sut.CreateLinkAsync(new CreateLinkRequest(TestProjectTextId, TestTagName, TestLinkName, TestLinkUrl));
+            var releaseWithLink = await _sut.GetAsync(TestProjectTextId, TestTagName);
+
+            //assert
+            createdLink.Should().Match<Link>(i =>
+                i.Name == TestLinkUrl &&
+                i.Url == TestLinkUrl);
+            releaseWithLink.Should().Match<Release>(i =>
+                i.Assets != null &&
+                i.Assets.Links != null &&
+                i.Assets.Links.Length == 1 &&
+                i.Assets.Links[0].Id == createdLink.Id &&
+                i.Assets.Links[0].Name == createdLink.Name &&
+                i.Assets.Links[0].Url == createdLink.Url &&
+                i.Assets.Links[0].External == createdLink.External);
+        }
     }
 }

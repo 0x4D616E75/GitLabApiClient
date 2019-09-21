@@ -36,5 +36,8 @@ namespace GitLabApiClient.Test.Utilities
         public static string TestRelease { get; set; } = "release-test";
         public static string TestTagName { get; set; } = "tag/test";
         public static string TestDescription { get; set; } = "This is just a test-description";
+
+        public static string TestLinkName { get; set; } = "link-test";
+        public static string TestLinkUrl { get; set; } = "https://example.com/";
     }
 }
