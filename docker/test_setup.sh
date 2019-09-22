@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export GITLAB_API_ENDPOINT=http://localhost/api/v4
-export export GITLAB_API_PRIVATE_TOKEN=ElijahBaley
+export GITLAB_API_PRIVATE_TOKEN=ElijahBaley
 configured=false
 while [ "$configured" = false ]
 do
