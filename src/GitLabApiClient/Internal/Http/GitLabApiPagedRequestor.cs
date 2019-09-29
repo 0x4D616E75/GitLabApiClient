@@ -107,7 +107,7 @@ namespace GitLabApiClient.Internal.Http
                 return toReturn;
 
             string valueString = headerValues.FirstOrDefault();
-            return valueString == null ? toReturn : (T)Convert.ChangeType(valueString, typeof(T));
+            return string.IsNullOrEmpty(valueString) ? toReturn : (T)Convert.ChangeType(valueString, typeof(T));
         }
     }
 }
