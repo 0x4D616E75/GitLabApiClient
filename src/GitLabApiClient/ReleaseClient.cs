@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GitLabApiClient.Internal.Http;
 using GitLabApiClient.Internal.Queries;
+using GitLabApiClient.Internal.Utilities;
 using GitLabApiClient.Models.Releases.Requests;
 using GitLabApiClient.Models.Releases.Responses;
 
@@ -37,7 +38,7 @@ namespace GitLabApiClient
             await _httpFacade.Post<Release>($"projects/{request.ProjectId}/releases/", request);
 
         public async Task<Release> UpdateAsync(UpdateReleaseRequest request) =>
-            await _httpFacade.Put<Release>($"projects/{request.ProjectId}/releases/", request);
+            await _httpFacade.Put<Release>($"projects/{request.ProjectId}/releases/{request.TagName.ToUrlEncoded()}", request);
 
         public async Task DeleteAsync(DeleteReleaseRequest request) =>
             await _httpFacade.Delete($"projects/{request.ProjectId}/releases/{request.TagName}");
@@ -47,18 +48,18 @@ namespace GitLabApiClient
 
 
         public async Task<Link> GetLinkAsync(string projectId, string tagName, string linkId) =>
-            await _httpFacade.Get<Link>($"projects/{projectId}/releases/{tagName}/assets/links/{linkId}");
+            await _httpFacade.Get<Link>($"projects/{projectId}/releases/{tagName.ToUrlEncoded()}/assets/links/{linkId}");
 
         public async Task<IList<Link>> GetLinksAsync(string projectId, string tagName) =>
-            await _httpFacade.GetPagedList<Link>($"projects/{projectId}/releases/{tagName}/assets/links");
+            await _httpFacade.GetPagedList<Link>($"projects/{projectId}/releases/{tagName.ToUrlEncoded()}/assets/links");
 
         public async Task<Link> CreateLinkAsync(CreateLinkRequest request) =>
-            await _httpFacade.PostLink($"projects/{request.ProjectId}/releases/{request.TagName}/assets/links/", request);
+            await _httpFacade.PostLink($"projects/{request.ProjectId}/releases/{request.TagName.ToUrlEncoded()}/assets/links/", request);
 
         public async Task<Link> UpdateLinkAsync(UpdateLinkRequest request) =>
-            await _httpFacade.PutLink($"projects/{request.ProjectId}/releases/{request.TagName}/assets/links/", request);
+            await _httpFacade.PutLink($"projects/{request.ProjectId}/releases/{request.TagName.ToUrlEncoded()}/assets/links/", request);
 
         public async Task DeleteAsync(DeleteLinkRequest request) =>
-            await _httpFacade.Delete($"projects/{request.ProjectId}/releases/{request.TagName}/assets/links/{request.LinkId}");
+            await _httpFacade.Delete($"projects/{request.ProjectId}/releases/{request.TagName.ToUrlEncoded()}/assets/links/{request.LinkId}");
     }
 }

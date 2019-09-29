@@ -1,4 +1,6 @@
-﻿namespace GitLabApiClient.Internal.Utilities
+﻿using System.Web;
+
+namespace GitLabApiClient.Internal.Utilities
 {
     internal static class StringExtensions
     {
@@ -10,6 +12,11 @@
         public static string ToLowerCaseString(this object obj)
         {
             return obj.ToString().ToLowerInvariant();
+        }
+
+        public static string ToUrlEncoded(this string value)
+        {
+            return HttpUtility.UrlEncode(value);
         }
     }
 }
