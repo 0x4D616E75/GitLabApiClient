@@ -83,12 +83,16 @@ namespace GitLabApiClient.Internal.Queries
 
         private static string ToQueryString(NameValueCollection nvc)
         {
-            var array =
-                from key in nvc.AllKeys
-                from value in nvc.GetValues(key)
-                select string.Format("{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(value));
+            if(nvc.Count > 0)
+            {
+                var array =
+                        from key in nvc.AllKeys
+                        from value in nvc.GetValues(key)
+                        select string.Format("{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(value));
 
-            return "?" + string.Join("&", array);
+                return "?" + string.Join("&", array);
+            }
+            return "";
         }
     }
 }
