@@ -3,7 +3,7 @@ services:
     gitlabapiclient:
         build: .
         restart: always
-        hostname: 'localhost' 
+        hostname: 'localhost'
         environment:
             GITLAB_OMNIBUS_CONFIG: |
                external_url 'http://localhost'
@@ -12,7 +12,3 @@ services:
            - '9190:80'
            - '9143:443'
            - '9122:22'
-        volumes:
-            - './volumes/config:/etc/gitlab'
-            - './volumes/logs:/var/log/gitlab'
-            - './volumes/data:/var/opt/gitlab'
